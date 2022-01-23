@@ -12,7 +12,7 @@ While building it, we will use different data strtcures/storage devices/protocol
 
 ## Design perspective
 1. ### Expection with the server?
-      keeping in mind, we are designing for Humans. Average time at which humans respond is 200ms(for us interval b/w consecutive key stokes), So we need to keep this in mind all the time and keep our latency < 200ms always. Amozon search recommendation api calls responds in around ~100ms.
+   keeping in mind the fact that we are designing for Humans. Average time at which humans respond is 200ms( interval b/w consecutive key stokes), So we need to keep this in mind and keep our latency < 200ms always and..... Amazon search recommendation api calls responds in around ~100ms.
       
 2. ### Where our we storing our dataset (strings which server will recommend)?
 
