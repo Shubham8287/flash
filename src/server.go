@@ -13,10 +13,10 @@ func main() {
         fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
     })
 
-    http.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request){
-        fmt.Fprintf(w, "Hi")
+    http.HandleFunc("/isAlive", func(w http.ResponseWriter, r *http.Request){
+        fmt.Fprintf(w, "Boss is always fine")
     })
 
-    log.Fatal(http.ListenAndServe(":8081", nil))
+    log.Fatal(http.ListenAndServe(":8080", nil))
 
 }
