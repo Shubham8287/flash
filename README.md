@@ -11,7 +11,10 @@ While building it, we will use different data strtcures/storage devices/protocol
 > for healthcheck route in localhost, I am getting response ~1-2ms.
 
 ## Design perspective
-1. ### Where our we storing our dataset (strings which server will recommend)?
+1. ### Expection with the server?
+      keeping in mind, we are designing for Humans. Average time at which humans respond is 200ms(for us interval b/w consecutive key stokes), So we need to keep this in mind all the time and keep our latency < 200ms always. Amozon search recommendation api calls responds in around ~100ms.
+      
+2. ### Where our we storing our dataset (strings which server will recommend)?
 
     Lookup time for Memory, SSD, and HDD is 100ns, 150us, 10 ms respective.
     It makes sense for us to keep all data in memory itself for low latency. We can do sharding on range bases, if data grows more than the size of 1 node. further we can use disk to take backup by taking periodic snapshot of data, for fault tolerance on poweroff. Later, we can also try to use SSD for storage and see how trade off b/w cost vs latency works.
@@ -30,7 +33,7 @@ While building it, we will use different data strtcures/storage devices/protocol
     As latency is most important factor, We can try to deploy in various regions and using a load balancer to route to closes geolocation server. We need low latency, with high avaibility and less or eventual consistency that means it's fine if users in different region see different suggestions for their prefix. I feel deployment is dominant part in keeping latency low, We can do benchmarking after adding every new component(load balancer, sharding) to understand their affects.
     
 5. ### Why Go?
-   Keeping perfomance in mind, I chose GO over any imprative language. Rust might be even better choice, but don't have enough knowledge with Rust rigth now so may be I will migrate it later.
+   Keeping perfomance in mind, I chose GO over any imprative language. Rust might be even better choice, but as I don't have enough knowledge with Rust rigth now so may be We an migrate it later.
 
 6. ### Lot to add.
 
