@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 const (
    //ALBHABET_SIZE total characters in english alphabet
     ALBHABET_SIZE = 26
