@@ -10,6 +10,12 @@ While building it, we will use different data strtcures/storage devices/protocol
 
 > for healthcheck route in localhost, I am getting response ~1-2ms.
 
+## Handy commands
+- `go run ./...` - to run server
+- `lsof -i:[PORT]` - to know PID of proccess running on PORT.
+- `curl -w "@curl-format.txt" -s [URL]` - to know response time of your request with curl
+- `sudo pmap [PID]` - check total memory used by PID
+
 ## Design perspective
 1. ### Expection with the server?
    keeping in mind the fact that we are designing for Humans. Average time at which humans respond is 200ms( interval b/w consecutive key stokes), So we need to keep this in mind and keep our latency < 200ms always and..... Amazon search recommendation api calls responds in around ~100ms.
