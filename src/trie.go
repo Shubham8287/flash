@@ -39,6 +39,7 @@ func (t *trie) find(word string) bool {
     for i := 0; i < wordLength; i++ {
         index := word[i] - 'a'
         if current.childrens[index] == nil {
+            t.insert(word);
             return false
         }
         current = current.childrens[index]
