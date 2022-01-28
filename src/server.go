@@ -7,12 +7,13 @@ import (
     "net/http"
     "encoding/json"
     "io/ioutil"
+    T "flash/trie"
 )
 
 const DataPath = "./data/words_dictionary.json";
 
 func main() {
-    trie := initTrie();
+    trie := T.InitTrie();
 
     fmt.Println("reading data...")  
     fileData, err := ioutil.ReadFile(DataPath);
@@ -28,7 +29,7 @@ func main() {
     }
 
     for i := 0; i < len(intialWordSet); i++ {
-        trie.insert(intialWordSet[i]);
+        trie.Insert(intialWordSet[i]);
     }
 
     fmt.Println("Server Started...")
@@ -43,7 +44,7 @@ func main() {
 
     http.HandleFunc("/find", func(w http.ResponseWriter, r *http.Request) {
         prefix := r.FormValue("prefix")
-        if(trie.find(prefix)) {
+        if(trie.Find(prefix)) {
             fmt.Fprintf(w, "Found the prefix")
         } else {
             fmt.Fprintf(w, "Not found any matching")
