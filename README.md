@@ -20,7 +20,7 @@ While building it, we will use different data strtcures/storage devices/protocol
 1. ### Expection with the server?
    keeping in mind the fact that we are designing for Humans. Average time at which humans respond is 200ms( interval b/w consecutive key stokes), So we need to keep this in mind and keep our latency < 200ms always and..... Amazon search recommendation api calls responds in around ~100ms.
       
-2. ### Where our we storing our dataset (strings which server will recommend)?
+2. ### Where are we storing our dataset (strings which server will recommend)?
 
     Lookup time for Memory, SSD, and HDD is 100ns, 150us, 10 ms respective.
     It makes sense for us to keep all data in memory itself for low latency. We can do sharding on range bases, if data grows more than the size of 1 node. further we can use disk to take backup by taking periodic snapshot of data, for fault tolerance on poweroff. Later, we can also try to use SSD for storage and see how trade off b/w cost vs latency works.
