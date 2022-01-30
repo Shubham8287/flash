@@ -36,19 +36,18 @@ func (t *trie) Insert(word string) {
 }
 
 func (t *trie) Find(word string) []string {
-    matchingStrings := []string{}
     wordLength := len(word)
     currentNode := t.root
     for i := 0; i < wordLength; i++ {
         index := word[i] - 'a'
         if currentNode.childrens[index] == nil {
             t.Insert(word);
-            return matchingStrings;
+            return []string {};
         }
         currentNode = currentNode.childrens[index]
     }
 
-    t.findAllStringsWithDFS(currentNode, &matchingStrings, word);
+    matchingStrings := t.generateAllWordsWithPrefix(currentNode, word);
     response := util.FilterMatchingStrings(matchingStrings);
 
 	return response
