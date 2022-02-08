@@ -1,5 +1,7 @@
 package trie
 
+import "flash/util"
+
 const (
    //ALBHABET_SIZE total characters in english alphabet
     ALBHABET_SIZE = 26
@@ -22,33 +24,31 @@ func InitTrie() *trie {
 
 func (t *trie) Insert(word string) {
     wordLength := len(word)
-    current := t.root
+    currentNode := t.root
     for i := 0; i < wordLength; i++ {
         index := word[i] - 'a'
-        if current.childrens[index] == nil {
-            current.childrens[index] = &trieNode{}
+        if currentNode.childrens[index] == nil {
+            currentNode.childrens[index] = &trieNode{}
         }
-        current = current.childrens[index]
+        currentNode = currentNode.childrens[index]
     }
-    current.isWordEnd = true
+    currentNode.isWordEnd = true
 }
 
-func (t *trie) Find(word string) bool {
+func (t *trie) Find(word string) []string {
     wordLength := len(word)
-    current := t.root
+    currentNode := t.root
     for i := 0; i < wordLength; i++ {
         index := word[i] - 'a'
-        if current.childrens[index] == nil {
+        if currentNode.childrens[index] == nil {
             t.Insert(word);
-            return false
+            return []string {};
         }
-        current = current.childrens[index]
+        currentNode = currentNode.childrens[index]
     }
-    if current.isWordEnd {
-        return true
-    }
-    
-	// insert it to the trie as we don't find it..
-	t.Insert(word);
-	return false
+
+    matchingStrings := t.generateAllWordsWithPrefix(currentNode, word);
+    response := util.FilterMatchingStrings(matchingStrings);
+
+	return response
 }

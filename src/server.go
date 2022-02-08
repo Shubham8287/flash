@@ -8,6 +8,7 @@ import (
     "encoding/json"
     "io/ioutil"
     T "flash/trie"
+    "flash/util"
 )
 
 const DataPath = "./data/words_dictionary.json";
@@ -44,11 +45,14 @@ func main() {
 
     http.HandleFunc("/find", func(w http.ResponseWriter, r *http.Request) {
         prefix := r.FormValue("prefix")
-        if(trie.Find(prefix)) {
-            fmt.Fprintf(w, "Found the prefix")
-        } else {
-            fmt.Fprintf(w, "Not found any matching")
+        matches := trie.Find(prefix);
+        w.Header().Set("Content-Type", "application/json");
+        response := util.Response {
+            Prefix: prefix,
+            Matches: matches,
         }
+
+        json.NewEncoder(w).Encode(response);
     })
 
     log.Fatal(http.ListenAndServe(":8080", nil))
