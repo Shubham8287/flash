@@ -5,6 +5,10 @@ While building it, we will use different data strtcures/storage devices/protocol
 ### To build server:
  `go run src/server.go`
 
+### To build server using Dockerfile:
+ - `docker build -t <image-name>`
+ - `docker run -dp <localport:exposedport> <image-name>` #flag 'd' detached mode and flag 'p' is for port
+  Try hitting "localhost:<localport>\", you will recieve "Hello" msg.
 ### Test latency:
 `curl -w "@curl-format.txt" -s "localhost:8080/isAlive"`
 
