@@ -1,8 +1,10 @@
 import axios from "axios";
+import constant from '../config/constants';
 
 function fetchSuggestions(data) {
+    const findApi = constant.serverUrl + ":" + constant.serverPort + constant.findApi;
     const retData = axios
-    .get("http://localhost:4000/find", { params: { prefix: data }})
+    .get(findApi, { params: { prefix: data }})
     .catch((error) => {
         console.error(error);
     });
