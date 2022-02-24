@@ -15,6 +15,7 @@ While building it, we will use different data strtcures/storage devices/protocol
 - `lsof -i:[PORT]` - to know PID of proccess running on PORT.
 - `curl -w "@curl-format.txt" -s [URL]` - to know response time of your request with curl
 - `sudo pmap [PID]` - check total memory used by PID
+- `ab -n 100 -c 1 -k URL` - use apache bench to make n request with c concurrency. -k is to keep tcp connection open. 
 
 ## Design perspective
 1. ### Expection with the server?

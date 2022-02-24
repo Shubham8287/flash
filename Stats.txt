@@ -1,0 +1,14 @@
+
+Latency test with below command
+
+ `ab -n 100 -c 1 https://flashy.azurewebsites.net/find?prefix=pop`
+ 
+  50%    102
+  66%    103
+  75%    103
+  80%    103
+  90%    103
+  95%    109
+  98%    205
+  99%    222
+ 100%    222
