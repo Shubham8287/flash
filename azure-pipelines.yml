@@ -13,9 +13,9 @@ variables:
   dockerRegistryServiceConnection: '8a2c981b-7611-490d-82fd-6894b63187ce'
   imageRepository: 'flashy'
   containerRegistry: 'flashy.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/src/server/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/server/src/Dockerfile'
   tag: '$(Build.BuildId)'
-  dockerContext: $(Build.SourcesDirectory)/src/server/
+  dockerContext: $(Build.SourcesDirectory)/server/src/
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
