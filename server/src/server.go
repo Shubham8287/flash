@@ -9,6 +9,7 @@ import (
     "io/ioutil"
     T "flash/trie"
     "flash/util"
+    "flash/conf"
 )
 
 const DataPath = "./data/words_dictionary.json";
@@ -25,6 +26,7 @@ func setupResponse(w *http.ResponseWriter, req *http.Request) {
 
 
 func main() {
+    conf.Init();
     trie := T.InitTrie();
 
     fmt.Println("reading data...")  
@@ -59,7 +61,6 @@ func main() {
         fmt.Println("Hello World!")
         prefix := r.FormValue("prefix")
         matches := trie.Find(prefix);
-        w.Header().Set("Content-Type", "application/json");
         response := util.Response {
             Prefix: prefix,
             Matches: matches,

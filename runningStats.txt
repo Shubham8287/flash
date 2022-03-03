@@ -1,7 +1,7 @@
 
 Latency test with below command
 
- `ab -n 100 -c 1 https://flashy.azurewebsites.net/find?prefix=pop`
+ `ab -n 100 -c 1 -k https://flashy.azurewebsites.net/find?prefix=pop`
  
   50%    102
   66%    103
