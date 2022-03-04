@@ -18,7 +18,7 @@ type trie struct {
 
 var trieInstance *trie = nil
 
-func GetTrie() *trie {
+func Get() *trie {
     if(trieInstance == nil) {
         trieInstance = &trie{
             root: &trieNode{},

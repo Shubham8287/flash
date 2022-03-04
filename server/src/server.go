@@ -6,13 +6,10 @@ import (
     "log"
     "net/http"
     "encoding/json"
-    "io/ioutil"
-    T "flash/trie"
+    "flash/ds"
     "flash/util"
-    "flash/conf"
 )
 
-const DataPath = "./data/words_dictionary.json";
 
 func enableCors(w *http.ResponseWriter) {
     (*w).Header().Set("Access-Control-Allow-Origin", "*")
@@ -26,25 +23,8 @@ func setupResponse(w *http.ResponseWriter, req *http.Request) {
 
 
 func initStuff() {
-    conf.Init();
-    localTrieObj := T.GetTrie();
-
-    fmt.Println("reading data...")  
-    fileData, err := ioutil.ReadFile(DataPath);
-    if err != nil {
-        fmt.Print(err)
-    }
-    
-    var intialWordSet = []string{}
-    fmt.Println("Unmarshalling data...")
-    err = json.Unmarshal(fileData, &intialWordSet)
-    if err != nil {
-        fmt.Println("error:", err)
-    }
-    
-    for i := 0; i < len(intialWordSet); i++ {
-        localTrieObj.Insert(intialWordSet[i]);
-    }
+    // naming is hard, please update if find better name
+    _ = ds.GetDs();
 }
 
 func homeReq(w http.ResponseWriter, r *http.Request) {
@@ -56,10 +36,10 @@ func pingReq(w http.ResponseWriter, r *http.Request) {
 }
 
 func findReq(w http.ResponseWriter, r *http.Request) {
-    localTrieObj:= T.GetTrie();
+    searchQueries:= ds.GetDs();
     setupResponse(&w, r)
         prefix := r.FormValue("prefix")
-        matches := localTrieObj.Find(prefix);
+        matches := searchQueries.Find(prefix);
         w.Header().Set("Content-Type", "application/json");
         response := util.Response {
             Prefix: prefix,
