@@ -24,8 +24,8 @@ func setupResponse(w *http.ResponseWriter, req *http.Request) {
 }
 
 
-func main() {
-    trie := T.InitTrie();
+func initStuff() {
+    localTrieObj := T.GetTrie();
 
     fmt.Println("reading data...")  
     fileData, err := ioutil.ReadFile(DataPath);
@@ -39,35 +39,45 @@ func main() {
     if err != nil {
         fmt.Println("error:", err)
     }
-
+    
     for i := 0; i < len(intialWordSet); i++ {
-        trie.Insert(intialWordSet[i]);
+        localTrieObj.Insert(intialWordSet[i]);
     }
+}
 
-    fmt.Println("Server Started...")
+func homeReq(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path));
+}
 
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
-    })
+func pingReq(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Boss is always fine");
+}
 
-    http.HandleFunc("/isAlive", func(w http.ResponseWriter, r *http.Request){
-        fmt.Fprintf(w, "Boss is always fine")
-    })
-
-    http.HandleFunc("/find", func(w http.ResponseWriter, r *http.Request) {
-        setupResponse(&w, r)
-        fmt.Println("Hello World!")
+func findReq(w http.ResponseWriter, r *http.Request) {
+    localTrieObj:= T.GetTrie();
+    setupResponse(&w, r)
         prefix := r.FormValue("prefix")
-        matches := trie.Find(prefix);
+        matches := localTrieObj.Find(prefix);
         w.Header().Set("Content-Type", "application/json");
         response := util.Response {
             Prefix: prefix,
             Matches: matches,
         }
-
         json.NewEncoder(w).Encode(response);
-    })
+}
 
+
+func handleRequests() {
+    fmt.Println("Server Started...");
+    http.HandleFunc("/", homeReq);
+    http.HandleFunc("/isAlive", pingReq);
+    http.HandleFunc("/find", findReq);
     log.Fatal(http.ListenAndServe(":8080", nil))
+}
 
+func main() {
+    // Intialize stuff
+    initStuff();
+    // Spin up the server and ready to serve requests.
+    handleRequests();
 }

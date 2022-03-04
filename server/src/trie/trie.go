@@ -16,10 +16,15 @@ type trie struct {
     root *trieNode
 }
 
-func InitTrie() *trie {
-    return &trie{
-        root: &trieNode{},
+var trieInstance *trie = nil
+
+func GetTrie() *trie {
+    if(trieInstance == nil) {
+        trieInstance = &trie{
+            root: &trieNode{},
+        }
     }
+    return trieInstance;
 }
 
 func (t *trie) Insert(word string) {
