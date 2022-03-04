@@ -24,19 +24,8 @@ func setupResponse(w *http.ResponseWriter, req *http.Request) {
 }
 
 
-func getTrieObject() {
-    if (trie) {
-        return trie;
-    }
-    trie := T.InitTrie();
-    return trie;
-}
-
 func initStuff() {
-    localTrieObj := getTrieObject();
-    for i := 0; i < len(intialWordSet); i++ {
-        localTrieObj.Insert(intialWordSet[i]);
-    }
+    localTrieObj := T.GetTrie();
 
     fmt.Println("reading data...")  
     fileData, err := ioutil.ReadFile(DataPath);
@@ -50,20 +39,23 @@ func initStuff() {
     if err != nil {
         fmt.Println("error:", err)
     }
+    
+    for i := 0; i < len(intialWordSet); i++ {
+        localTrieObj.Insert(intialWordSet[i]);
+    }
 }
 
 func homeReq(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path));
 }
 
-func pinReq(w http.ResponseWriter, r *http.Request) {
+func pingReq(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "Boss is always fine");
 }
 
 func findReq(w http.ResponseWriter, r *http.Request) {
-    localTrieObj:= getTrieObject();
+    localTrieObj:= T.GetTrie();
     setupResponse(&w, r)
-        fmt.Println("Hello World!")
         prefix := r.FormValue("prefix")
         matches := localTrieObj.Find(prefix);
         w.Header().Set("Content-Type", "application/json");
