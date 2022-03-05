@@ -1,19 +1,19 @@
 package conf
 
 import (
-    "encoding/json"
-    "fmt"
-	"os"
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
+	"os"
 )
 
-const CONFIGPATH = "conf/conf.json";
+const CONFIGPATH = "conf/conf.json"
 
 type Config struct {
-    Algo string `json:"algo"`
+	Algo string `json:"algo"`
 }
 
-var configInstance *Config = nil;
+var configInstance *Config = nil
 
 func readConfig() *Config {
 	jsonFile, err := os.Open(CONFIGPATH)
@@ -26,12 +26,12 @@ func readConfig() *Config {
 	config := &Config{}
 	json.Unmarshal(byteValue, config)
 
-	return config;
+	return config
 }
 
 func Get() *Config {
-	if(configInstance == nil) {
-		configInstance = readConfig();
+	if configInstance == nil {
+		configInstance = readConfig()
 	}
-	return configInstance;
+	return configInstance
 }
