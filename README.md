@@ -44,7 +44,7 @@ While building it, we will use different data strtcures/storage devices/protocol
     As latency is most important factor, We can try to deploy in various regions and using a load balancer to route to closes geolocation server. We need low latency, with high avaibility and less or eventual consistency that means it's fine if users in different region see different suggestions for their prefix. I feel deployment is dominant part in keeping latency low, We can do benchmarking after adding every new component(load balancer, sharding) to understand their affects.
     
 5. ### Why Go?
-   Keeping perfomance in mind, I chose GO over any imprative language. Rust might be even better choice, but as I don't have enough knowledge with Rust rigth now so may be We an migrate it later.
+   Keeping perfomance in mind, I chose GO over any iterperative language. Rust might be even better choice, but as I don't have enough knowledge with Rust rigth now so may be We an migrate it later.
 
 6. ### Lot to add.
 
