@@ -34,10 +34,10 @@ func pingReq(w http.ResponseWriter, r *http.Request) {
 }
 
 func findReq(w http.ResponseWriter, r *http.Request) {
-	searchQueries := ds.GetDs()
+	searchBucket := ds.GetDs()
 	setupResponse(&w, r)
 	prefix := r.FormValue("prefix")
-	matches := searchQueries.Find(prefix)
+	matches := searchBucket.Find(prefix)
 	w.Header().Set("Content-Type", "application/json")
 	response := util.Response{
 		Prefix:  prefix,
@@ -46,11 +46,23 @@ func findReq(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
+func insertReq(w http.ResponseWriter, r *http.Request) {
+	searchBucket := ds.GetDs()
+	setupResponse(&w, r)
+	prefix := r.FormValue("prefix")
+	searchBucket.Insert(prefix)
+	w.Header().Set("Content-Type", "application/json")
+	response := util.Response{
+		Prefix: prefix,
+	}
+	json.NewEncoder(w).Encode(response)
+}
 func handleRequests() {
 	fmt.Println("Server Started...")
 	http.HandleFunc("/", homeReq)
 	http.HandleFunc("/isAlive", pingReq)
 	http.HandleFunc("/find", findReq)
+	http.HandleFunc("/insert", insertReq)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 

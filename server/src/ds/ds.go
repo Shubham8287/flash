@@ -3,7 +3,8 @@ package ds
 import (
 	"encoding/json"
 	"flash/conf"
-	T "flash/ds/trie"
+	"flash/ds/hashmap"
+	"flash/ds/trie"
 	"fmt"
 	"io/ioutil"
 )
@@ -43,9 +44,9 @@ func GetDs() DataStructure {
 
 	configuration := conf.Get()
 	if configuration.Algo == "map" {
-		DSObj = T.Get()
+		DSObj = hashmap.Get()
 	} else {
-		DSObj = T.Get()
+		DSObj = trie.Get()
 	}
 	fillData(DSObj)
 	return DSObj
