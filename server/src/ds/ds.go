@@ -9,18 +9,26 @@ import (
 	"io/ioutil"
 )
 
-const DataPath = "./data/words_dictionary.json"
-
 type DataStructure interface {
 	Find(string) []string
 	Insert(string)
 }
 
-var DSObj DataStructure = nil
+var bucketData DataStructure = nil
+var configuration conf.Config = conf.Get()
 
-func fillData(DSObj DataStructure) {
+func init() {
+	if configuration.Algo == "map" {
+		bucketData = hashmap.Get()
+	} else {
+		bucketData = trie.Get()
+	}
+	fillData(bucketData)
+}
+
+func fillData(bucketData DataStructure) {
 	fmt.Println("reading data...")
-	fileData, err := ioutil.ReadFile(DataPath)
+	fileData, err := ioutil.ReadFile(configuration.DataPath)
 	if err != nil {
 		fmt.Print(err)
 	}
@@ -33,21 +41,13 @@ func fillData(DSObj DataStructure) {
 	}
 
 	for i := 0; i < len(intialWordSet); i++ {
-		DSObj.Insert(intialWordSet[i])
+		bucketData.Insert(intialWordSet[i])
 	}
 }
 
 func GetDs() DataStructure {
-	if DSObj != nil {
-		return DSObj
+	if bucketData != nil {
+		return bucketData
 	}
-
-	configuration := conf.Get()
-	if configuration.Algo == "map" {
-		DSObj = hashmap.Get()
-	} else {
-		DSObj = trie.Get()
-	}
-	fillData(DSObj)
-	return DSObj
+	return bucketData
 }
