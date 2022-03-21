@@ -20,11 +20,6 @@ func setupResponse(w *http.ResponseWriter, req *http.Request) {
 	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 }
 
-func initStuff() {
-	// naming is hard, please update if find better name
-	_ = ds.GetDs()
-}
-
 func homeReq(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
 }
@@ -67,8 +62,6 @@ func handleRequests() {
 }
 
 func main() {
-	// Intialize stuff
-	initStuff()
 	// Spin up the server and ready to serve requests.
 	handleRequests()
 }
