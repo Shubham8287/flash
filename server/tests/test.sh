@@ -1,6 +1,5 @@
 DATA_PATH='../src/data/words_dictionary.json'
 TEST_DATA_PATH='./test_data.json'
-
 echo "[" > $TEST_DATA_PATH
 totalLines=$(wc -l < $DATA_PATH)
 
