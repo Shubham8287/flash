@@ -5,8 +5,10 @@ import (
 	"flash/conf"
 	"flash/ds/hashmap"
 	"flash/ds/trie"
+	. "flash/logger"
 	"fmt"
 	"io/ioutil"
+	"time"
 )
 
 type DataStructure interface {
@@ -27,22 +29,28 @@ func init() {
 }
 
 func fillData(bucketData DataStructure) {
-	fmt.Println("reading data...")
+	Log.Info("file_reading_started")
 	fileData, err := ioutil.ReadFile(configuration.DataPath)
 	if err != nil {
 		fmt.Print(err)
 	}
 
 	var intialWordSet = []string{}
-	fmt.Println("Unmarshalling data...")
 	err = json.Unmarshal(fileData, &intialWordSet)
 	if err != nil {
 		fmt.Println("error:", err)
 	}
+	Log.Info("file_reading_done")
+
+	start := time.Now()
+
+	Log.Info("Initialiazing_data_in_ds_start")
 
 	for i := 0; i < len(intialWordSet); i++ {
 		bucketData.Insert(intialWordSet[i])
 	}
+	t := time.Now()
+	Log.WithField("elapsed_time", t.Sub(start)).Info("Initialiazing_data_in_ds_done")
 }
 
 func GetDs() DataStructure {

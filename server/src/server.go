@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"flash/ds"
+	. "flash/logger"
 	"flash/util"
 	"fmt"
 	"html"
-	"log"
 	"net/http"
 )
 
@@ -53,12 +53,12 @@ func insertReq(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 func handleRequests() {
-	fmt.Println("Server Started...")
 	http.HandleFunc("/", homeReq)
 	http.HandleFunc("/isAlive", pingReq)
 	http.HandleFunc("/find", findReq)
 	http.HandleFunc("/insert", insertReq)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	Log.Info("server_started")
+	Log.Info(http.ListenAndServe(":8080", nil))
 }
 
 func main() {

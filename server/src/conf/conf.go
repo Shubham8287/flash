@@ -2,9 +2,12 @@ package conf
 
 import (
 	"encoding/json"
+	. "flash/logger"
 	"fmt"
 	"io/ioutil"
 	"os"
+
+	"github.com/sirupsen/logrus"
 )
 
 const CONFIGPATH = "./conf.json"
@@ -17,6 +20,7 @@ type Config struct {
 var configInstance Config
 
 func readConfig() Config {
+	Log.Info("config_reading_start")
 	jsonFile, err := os.Open(CONFIGPATH)
 	if err != nil {
 		fmt.Println("error:", err)
@@ -26,6 +30,10 @@ func readConfig() Config {
 
 	config := Config{}
 	json.Unmarshal(byteValue, &config)
+	Log.WithFields(logrus.Fields{
+		"algorithm": config.Algo,
+		"data_path": config.DataPath,
+	}).Info("config_reading_done")
 
 	return config
 }
