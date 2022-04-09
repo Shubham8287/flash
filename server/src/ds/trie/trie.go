@@ -1,6 +1,8 @@
 package trie
 
-import "flash/util"
+import (
+	"flash/util"
+)
 
 const (
 	//ALBHABET_SIZE total characters in english alphabet
@@ -46,7 +48,7 @@ func (t *trie) Find(word string) []string {
 	for i := 0; i < wordLength; i++ {
 		index := word[i] - 'a'
 		if currentNode.childrens[index] == nil {
-			t.Insert(word)
+			//t.Insert(word)
 			return []string{}
 		}
 		currentNode = currentNode.childrens[index]
