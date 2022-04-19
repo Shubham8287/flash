@@ -6,9 +6,8 @@ const BASE_URL = 'http://localhost:8080'
 
 export const options = {
     stages: [
-      { duration: '1s', target: 2 },
-      { duration: '1s', target: 10 },
-      { duration: '1s', target: 0 },
+      { duration: '1s', target: 1 },
+      { duration: '20s', target: 2000 }
     ],
   };
 

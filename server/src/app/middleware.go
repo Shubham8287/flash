@@ -2,7 +2,6 @@ package app
 
 import (
 	"context"
-	. "flash/logger"
 	"flash/util"
 	"net/http"
 	"time"
@@ -17,7 +16,7 @@ func Middleware(next http.HandlerFunc) http.HandlerFunc {
 		ctx = context.WithValue(ctx, util.REQUEST_ID, reqID.String())
 		ctx = context.WithValue(ctx, util.LAST_LOG_TIME, time.Now())
 		r = r.WithContext(ctx)
-		Log.WithField("request_id", reqID).Info("request_id_generated")
+		// Log.WithField("request_id", reqID).Info("request_id_generated")
 		next.ServeHTTP(w, r)
 	})
 }
