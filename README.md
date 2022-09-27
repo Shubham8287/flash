@@ -12,6 +12,9 @@ While building it, we will use different data strtcures/storage devices/protocol
 ### Test latency:
 `curl -w "@curl-format.txt" -s "localhost:8080/isAlive"`
 
+ ### To profile:
+ - import `_ "net/http/pprof"`
+ - run `go tool pprof -http : http://localhost:8080/debug/pprof/{allocs/goroutine/heap/profile/etc}
 > for healthcheck route in localhost, I am getting response ~1-2ms.
 
 ## Handy commands
