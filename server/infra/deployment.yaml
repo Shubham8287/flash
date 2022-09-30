@@ -25,7 +25,8 @@ kind: Service
 metadata:
  name: flash
 spec:
-  ports:
-  - port: 80
   selector:
     app: flash
+  ports:
+  - port: 80
+    targetPort: 8080
