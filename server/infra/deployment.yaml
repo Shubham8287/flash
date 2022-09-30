@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flash
+  labels:
+    app: flash
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flash
+  template:
+    metadata:
+      labels:
+        app: flash
+    spec:
+      containers:
+      - name: flash
+        image: flashy.azurecr.io/flashy:latest
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: flash
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: flash
