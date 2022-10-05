@@ -1,9 +1,9 @@
 # flash
-Flash is highly optimised typeahead(search recommendation) server. We are building it with an aim to learn various tradeoffs/practices.
-While building it, we will use different data strtcures/storage devices/protocols/deployment strategies and compare them from different aspects.
+Flash is highly optimised typeahead(search recommendation) server. We are building it with an aim to learn and teach various tradeoffs/practices.
+While building it, we will use different data structures/storage devices/protocols/deployment strategies and compare them from different aspects.
 
 ### To build server:
- `go run src/server.go`
+ `go run server.go`
 
 ### To build server using Dockerfile:
  - `docker build -t <image-name>`
