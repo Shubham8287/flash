@@ -3,14 +3,26 @@ Flash is highly optimised typeahead(search recommendation) server. We are buildi
 While building it, we will use different data structures/storage devices/protocols/deployment strategies and compare them from different aspects.
 
 ### To build server:
- `go run server.go`
+ ```
+ git clone https://github.com/Shubham8287/flash
+ cd flash/server/src
+ go run server.go
+ ```
 
 ### To build server using Dockerfile:
  - `docker build -t <image-name>`
  - `docker run -dp <localport:exposedport> <image-name>` #flag 'd' detached mode and flag 'p' is for port
   Try hitting "localhost:<localport>\", you will recieve "Hello" msg.
-### Test latency:
-`curl -w "@curl-format.txt" -s "localhost:8080/isAlive"`
+
+### Check if server is up:
+`curl localhost:8080/isAlive`
+You should get response - `Boss is always fine`
+
+To run actual Api hit - `localhost:8080/find?prefix=yo`
+you will get a response of top matching string starting with prefix "yo"
+```
+{"prefix":"yo","matches":["yo","yob","yobbo","yobboes","yobbos","yobi","yobs","yocco","yochel","yock","yocked","yockel","yockernut","yocking","yocks","yod","yode","yodel","yodeled","yodeler"]}
+```
 
  ### To profile:
  - import `_ "net/http/pprof"`
