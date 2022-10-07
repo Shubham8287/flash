@@ -1,6 +1,6 @@
 module flash
 
-go 1.17
+go 1.19
 
 replace flash/app => ./app
 
