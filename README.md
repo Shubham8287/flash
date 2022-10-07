@@ -10,7 +10,7 @@ While building it, we will use different data structures/storage devices/protoco
  ```
 
 ### To build server using Dockerfile:
- - `docker build -t <image-name>`
+ - `docker build -t <image-name> .`
  - `docker run -dp <localport:exposedport> <image-name>` #flag 'd' detached mode and flag 'p' is for port
   Try hitting "localhost:<localport>\", you will recieve "Hello" msg.
 
