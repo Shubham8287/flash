@@ -16,4 +16,4 @@ scrape_configs:
     metrics_path: '/metrics'
     scrape_interval: 5s
     static_configs:
-      - targets: ['docker.for.mac.host.internal:8080']
+      - targets: ['localhost:8080']
