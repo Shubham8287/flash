@@ -15,6 +15,7 @@ const CONFIGPATH = "./conf.json"
 type Config struct {
 	Algo     string `json:"algo"`
 	DataPath string `json:"data_path"`
+	LoggingEnabled bool `json:"logging"`
 }
 
 var configInstance Config
@@ -33,6 +34,7 @@ func readConfig() Config {
 	Log.WithFields(logrus.Fields{
 		"algorithm": config.Algo,
 		"data_path": config.DataPath,
+		"logging_enabled": config.LoggingEnabled,
 	}).Info("config_reading_done")
 
 	return config
