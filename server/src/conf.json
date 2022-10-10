@@ -1,7 +1,8 @@
 {
-    "algo": "map",
-    "//algo": "trie",
+    "//algo": "map",
+    "algo": "trie",
     "//data_path": "./data/sample_data.json",
     "data_path": "./data/words_dictionary.json",
-    "logging": true
+    "//logging": true,
+    "logging": false
 }

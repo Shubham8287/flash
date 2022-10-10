@@ -27,5 +27,6 @@ services:
       - ./grafana_datasources.yml:/etc/grafana/provisioning/datasources/all.yaml
      # - ./grafana_config.ini:/etc/grafana/config.ini
       - grafana_data:/var/lib/grafana
-    ports:
-      - 3000:3000
+    # ports:
+    #   - 3000:3000
+    network_mode: "host"
