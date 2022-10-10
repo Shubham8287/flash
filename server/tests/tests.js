@@ -6,7 +6,7 @@ const BASE_URL = 'http://localhost:8080'
 
 export const options = {
     stages: [
-      { duration: '1s', target: 1 },
+      { duration: '1s', target: 2000 },
       { duration: '20s', target: 2000 }
     ],
   };
@@ -19,7 +19,9 @@ export const options = {
 export default function () {
   const rndIndex = Math.floor((Math.random()*10000000)%testQueries.length)
   const res = http.get(BASE_URL+'/find?prefix='+ testQueries[rndIndex]);
+  //const res = http.get(BASE_URL+'/isAlive');
   check(res, { 'status was 200': (r) => isFine(JSON.parse(r.body), testQueries[rndIndex]) });
+ // check(res, { 'status was 200': (r) => true });
   sleep(1);
 }
 
