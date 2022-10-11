@@ -25,17 +25,23 @@ func PingReq(w http.ResponseWriter, r *http.Request) {
 func FindReq(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	searchBucket := ds.GetDs(ctx)
-	setupResponse(&w, r)
+	setupResponse(&w)
 	prefix := r.FormValue("prefix")
-	matches := searchBucket.Find(prefix)
+
+	// sanitize the incoming "prefix" query param
+	sanitizedPrefix := util.SanitizePrefix(prefix)
+	
+	matches := searchBucket.Find(sanitizedPrefix)
+
 	if(config.LoggingEnabled == true) {
 		logger.Log.WithFields(logrus.Fields{
 			"request_id":   util.GetRequestID(ctx),
 			"time_elapsed": util.SetElapsedTimeStamp(ctx),
 		}).Info("find_matches_received")
+	
 	}
 	response := util.Response{
-		Prefix:  prefix,
+		Prefix:  sanitizedPrefix,
 		Matches: matches,
 	}
 	json.NewEncoder(w).Encode(response)
@@ -44,11 +50,16 @@ func FindReq(w http.ResponseWriter, r *http.Request) {
 func InsertReq(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	searchBucket := ds.GetDs(ctx)
-	setupResponse(&w, r)
+	setupResponse(&w)
 	prefix := r.FormValue("prefix")
-	searchBucket.Insert(prefix)
+
+	// sanitize the incoming "prefix" query param.
+	sanitizedPrefix := util.SanitizePrefix(prefix)	
+
+	searchBucket.Insert(sanitizedPrefix)
+
 	response := util.Response{
-		Prefix: prefix,
+		Prefix: sanitizedPrefix,
 	}
 	json.NewEncoder(w).Encode(response)
 }
