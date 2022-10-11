@@ -29,7 +29,7 @@ func FindReq(w http.ResponseWriter, r *http.Request) {
 	prefix := r.FormValue("prefix")
 
 	// sanitize the incoming "prefix" query param
-	sanitizedPrefix := util.SanitizePrefix(prefix)
+	sanitizedPrefix := util.SanitizeString(prefix)
 	
 	matches := searchBucket.Find(sanitizedPrefix)
 
@@ -54,7 +54,7 @@ func InsertReq(w http.ResponseWriter, r *http.Request) {
 	prefix := r.FormValue("prefix")
 
 	// sanitize the incoming "prefix" query param.
-	sanitizedPrefix := util.SanitizePrefix(prefix)	
+	sanitizedPrefix := util.SanitizeString(prefix)	
 
 	searchBucket.Insert(sanitizedPrefix)
 

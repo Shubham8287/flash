@@ -1,5 +1,9 @@
 package hashmap
 
+import (
+	"flash/util"
+)
+
 type bucketType map[string][]Item
 
 var bucket bucketType = nil
@@ -42,6 +46,9 @@ func (b *bucketType) Find(prefix string) []string {
 }
 
 func (b *bucketType) Insert(word string) {
+	// sanitize the input string
+	word:= util.SanitizeString(word)
+
 	var prefixWord string
 	for i := 0; i < len(word); i++ {
 		prefixWord += string(word[i])
