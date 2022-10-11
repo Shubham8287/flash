@@ -24,9 +24,6 @@ func SanitizePrefix(prefix string) string {
 	// lowercase all the upercase letters
 	sanitizedPrefix = strings.ToLower(sanitizedPrefix)
 
-	// print the sanitized string
-	fmt.Println(sanitizedPrefix)
-
 	// return the sanitized string
 	return sanitizedPrefix
 }
