@@ -47,7 +47,7 @@ func (b *bucketType) Find(prefix string) []string {
 
 func (b *bucketType) Insert(word string) {
 	// sanitize the input string
-	word:= util.SanitizeString(word)
+	word = util.SanitizeString(word)
 
 	var prefixWord string
 	for i := 0; i < len(word); i++ {

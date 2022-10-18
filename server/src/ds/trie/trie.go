@@ -30,6 +30,9 @@ func Get() *trie {
 }
 
 func (t *trie) Insert(word string) {
+	// sanitize the input string
+	word = util.SanitizeString(word)
+	
 	wordLength := len(word)
 	currentNode := t.root
 	for i := 0; i < wordLength; i++ {
