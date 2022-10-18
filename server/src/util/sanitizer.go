@@ -1,12 +1,11 @@
 package util
 import (
-	"fmt"
 	"strings"
 	"regexp"
 )
 
 // Sanitized the input prefix recieved.
-func SanitizePrefix(prefix string) string {
+func SanitizeString(prefix string) string {
 	// regex expression
 	nonSpecialCharacterRegex := regexp.MustCompile(`[^a-zA-Z/-]+`)
 	
