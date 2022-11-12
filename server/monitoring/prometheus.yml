@@ -13,10 +13,10 @@ global:
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'flash'
-    metrics_path: '/metrics'
+    metrics_path: '/'
     scrape_interval: 5s
     static_configs:
-      - targets: ['localhost:8080']
+      - targets: ['localhost:8081']
 
   - job_name: "node"
     static_configs:
