@@ -26,10 +26,9 @@ func handleRequests() {
 	mux.HandleFunc("/isAlive", app.Middleware(app.PingReq))
 	mux.HandleFunc("/find", app.FindReq)
 	mux.HandleFunc("/insert", app.InsertReq)
-	mux.Handle("/metrics", promhttp.Handler())
 
 	serv := std.Handler("", mdlw, mux)
-	Log.WithField("PORT", PORT).Info("server_started")
+//	http.Handle("/metrics", promhttp.Handler())
 	// Serve our metrics.
 	go func() {
 		log.Printf("metrics listening at %s", metricsAddr)

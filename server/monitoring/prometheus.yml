@@ -16,8 +16,8 @@ scrape_configs:
     metrics_path: '/'
     scrape_interval: 5s
     static_configs:
-      - targets: ['localhost:8081']
+      - targets: ['192.168.1.69:8081']
 
   - job_name: "node"
     static_configs:
-    - targets: ["localhost:9100"]
+    - targets: ["192.168.1.69:9100"]

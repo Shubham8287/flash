@@ -2,12 +2,12 @@ import http from 'k6/http';
 import { SharedArray } from 'k6/data';
 import { sleep, check, randomSeed } from 'k6';
 
-const BASE_URL = 'http://localhost:8080'
+const BASE_URL = "https://192.168.1.69"
 
 export const options = {
     stages: [
-      { duration: '1s', target: 2000 },
-      { duration: '20s', target: 2000 }
+      { duration: '1s', target: 200 },
+      { duration: '120s', target: 200 }
     ],
   };
 
