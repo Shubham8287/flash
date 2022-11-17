@@ -15,9 +15,13 @@ services:
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
-    # ports:
-    #   - 9090:9090
-    network_mode: "host"
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    ports:
+      - 9090:9090
+    #network_mode: "host"
 
   grafana:
     container_name: grafana
@@ -27,6 +31,6 @@ services:
       - ./grafana_datasources.yml:/etc/grafana/provisioning/datasources/all.yaml
      # - ./grafana_config.ini:/etc/grafana/config.ini
       - grafana_data:/var/lib/grafana
-    # ports:
-    #   - 3000:3000
-    network_mode: "host"
+    ports:
+      - 3000:3000
+    #network_mode: "host"

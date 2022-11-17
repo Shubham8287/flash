@@ -15,7 +15,7 @@ func handleRequests() {
 	http.HandleFunc("/isAlive", app.Middleware(app.PingReq))
 	http.HandleFunc("/find", app.Middleware(app.FindReq))
 	http.HandleFunc("/insert", app.InsertReq)
-	http.Handle("/metrics", promhttp.Handler())
+//	http.Handle("/metrics", promhttp.Handler())
 	Log.Fatal(http.ListenAndServe(":"+PORT, nil))
 }
 
