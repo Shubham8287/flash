@@ -8,8 +8,6 @@ services:
 
   prometheus:
     container_name: prometheus
-    networks:
-      - monnet
     hostname: prometheus
     image: prom/prometheus
     volumes:
@@ -26,8 +24,6 @@ services:
 
   grafana:
     container_name: grafana
-    networks:
-      - monnet
     hostname: grafana
     image: grafana/grafana
     volumes:
@@ -36,6 +32,3 @@ services:
       - grafana_data:/var/lib/grafana
     ports:
       - 3000:3000
-networks:
-  monnet:
-    driver: bridge
