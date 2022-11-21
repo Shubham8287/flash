@@ -2,13 +2,14 @@ package app
 
 import (
 	"encoding/json"
-	"flash/ds"
-	"flash/util"
 	"flash/conf"
+	"flash/ds"
 	"flash/logger"
+	"flash/util"
 	"fmt"
 	"html"
 	"net/http"
+
 	"github.com/sirupsen/logrus"
 )
 
@@ -30,15 +31,15 @@ func FindReq(w http.ResponseWriter, r *http.Request) {
 
 	// sanitize the incoming "prefix" query param
 	sanitizedPrefix := util.SanitizeString(prefix)
-	
+
 	matches := searchBucket.Find(sanitizedPrefix)
 
-	if(config.LoggingEnabled == true) {
+	if config.LoggingEnabled == true {
 		logger.Log.WithFields(logrus.Fields{
-			"request_id":   util.GetRequestID(ctx),
-			"time_elapsed": util.SetElapsedTimeStamp(ctx),
+			"request_id": util.GetRequestID(ctx),
+			// "time_elapsed": util.SetElapsedTimeStamp(ctx),
 		}).Info("find_matches_received")
-	
+
 	}
 	response := util.Response{
 		Prefix:  sanitizedPrefix,
@@ -54,7 +55,7 @@ func InsertReq(w http.ResponseWriter, r *http.Request) {
 	prefix := r.FormValue("prefix")
 
 	// sanitize the incoming "prefix" query param.
-	sanitizedPrefix := util.SanitizeString(prefix)	
+	sanitizedPrefix := util.SanitizeString(prefix)
 
 	searchBucket.Insert(sanitizedPrefix)
 
