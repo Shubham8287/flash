@@ -15,8 +15,7 @@ dep:
 
 
 mon:
-	cd ../monitoring
-	sudo docker-compose up
+	cd ../monitoring; sudo docker-compose up;
 
 run:
 	go run server.go
