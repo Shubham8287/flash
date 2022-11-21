@@ -1,6 +1,16 @@
 version: '3'
 
 services:
+  perfstat:
+    container_name: perfstat
+    image: flaviostutz/perfstat
+    privileged: true
+    volumes:
+      - /etc/hostname:/etc/hostname
+    ports:
+      - 8880:8880
+    deploy:
+      mode: global
 
   node-exporter:
     image: prom/node-exporter:latest
