@@ -5,3 +5,7 @@ datasources:
     type: 'prometheus'
     access: 'proxy'
     url: 'http://prometheus:9090'
+  - name: 'perfstat'
+    type: 'prometheus'
+    access: 'proxy'
+    url: 'http://perfstat:8880/metrics'

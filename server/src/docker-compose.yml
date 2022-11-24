@@ -1,6 +1,18 @@
 version: '3'
 
 services:
+  perfstat:
+    container_name: perfstat
+    image: flaviostutz/perfstat
+    privileged: true
+    volumes:
+      - /etc/hostname:/etc/hostname
+    ports:
+      - 8880:8880
+    deploy:
+      mode: global
+    networks:
+      -  app
 
   node-exporter:
     image: prom/node-exporter:latest
@@ -15,13 +27,20 @@ services:
       - '--path.rootfs=/rootfs'
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
-    # expose:
-    #   - 9100
-    network_mode: "host"
+    expose:
+      - 9100
+    networks:
+      -  app
+
 
   flash:
     container_name: flash
     build: .
-    # ports:
-    #   - 9090:9090
-    network_mode: "host"
+    ports:
+      - 8080:8080
+    networks:
+      -  app
+
+networks:
+  app:
+    driver: bridge
