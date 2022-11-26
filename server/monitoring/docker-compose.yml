@@ -21,8 +21,8 @@ services:
       - '--web.enable-lifecycle'
     ports:
       - 9090:9090
-    networks:
-      - src_app
+    # networks:
+    #   - src_app
 
   grafana:
     container_name: grafana
@@ -32,10 +32,10 @@ services:
       - ./grafana_datasources.yml:/etc/grafana/provisioning/datasources/all.yaml
      # - ./grafana_config.ini:/etc/grafana/config.ini
       - grafana_data:/var/lib/grafana
-    networks:
-      - src_app
+    # networks:
+    #   - src_app
     ports:
       - 3000:3000
-networks:
-  src_app:
-    external: true
+# networks:
+#   src_app:
+#     external: true
