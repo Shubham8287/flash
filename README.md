@@ -2,40 +2,6 @@
 Flash is highly optimised typeahead(search recommendation) server. We are building it with an aim to learn and teach various tradeoffs/practices.
 While building it, we will use different data structures/storage devices/protocols/deployment strategies and compare them from different aspects.
 
-### To build server:
- ```
- git clone https://github.com/Shubham8287/flash
- cd flash/server/src
- go run server.go
- ```
-
-### To build server using Dockerfile:
- - `docker build -t <image-name> .`
- - `docker run -dp <localport:exposedport> <image-name>` #flag 'd' detached mode and flag 'p' is for port
-  Try hitting "localhost:<localport>\", you will recieve "Hello" msg.
-
-### Check if server is up:
-`curl localhost:8080/isAlive`
-You should get response - `Boss is always fine`
-
-To run actual Api hit - `localhost:8080/find?prefix=yo`
-you will get a response of top matching string starting with prefix "yo"
-```
-{"prefix":"yo","matches":["yo","yob","yobbo","yobboes","yobbos","yobi","yobs","yocco","yochel","yock","yocked","yockel","yockernut","yocking","yocks","yod","yode","yodel","yodeled","yodeler"]}
-```
-
- ### To profile:
- - import `_ "net/http/pprof"`
- - run `go tool pprof -http : http://localhost:8080/debug/pprof/{allocs/goroutine/heap/profile/etc}
-> for healthcheck route in localhost, I am getting response ~1-2ms.
-
-## Handy commands
-- `go run ./...` - to run server
-- `lsof -i:[PORT]` - to know PID of proccess running on PORT.
-- `curl -w "@curl-format.txt" -s [URL]` - to know response time of your request with curl
-- `sudo pmap [PID]` - check total memory used by PID
-- `ab -n 100 -c 1 -k URL` - use apache bench to make n request with c concurrency. -k is to keep tcp connection open. 
-
 ## Design perspective
 1. ### Expection with the server?
    keeping in mind the fact that we are designing for Humans. Average time at which humans respond is 200ms( interval b/w consecutive key stokes), So we need to keep this in mind and keep our latency < 200ms always and..... Amazon search recommendation api calls responds in around ~100ms.
@@ -62,4 +28,35 @@ you will get a response of top matching string starting with prefix "yo"
    Keeping perfomance in mind, I chose GO over any iterperative language. Rust might be even better choice, but as I don't have enough knowledge with Rust rigth now so may be We an migrate it later.
 
 6. ### Lot to add.
+
+
+### To build server:
+ ```
+ git clone https://github.com/Shubham8287/flash
+ cd flash/server/src
+ make run # start flash and node expoerter server
+ make mon # to setup monitoring
+ ```
+
+### Check if server is up:
+`curl localhost:8080/isAlive`
+You should get response - `Boss is always fine`
+
+To run actual Api hit - `localhost:8080/find?prefix=yo`
+you will get a response of top matching string starting with prefix "yo"
+```
+{"prefix":"yo","matches":["yo","yob","yobbo","yobboes","yobbos","yobi","yobs","yocco","yochel","yock","yocked","yockel","yockernut","yocking","yocks","yod","yode","yodel","yodeled","yodeler"]}
+```
+
+ ### To profile:
+ - import `_ "net/http/pprof"`
+ - run `go tool pprof -http : http://localhost:8080/debug/pprof/{allocs/goroutine/heap/profile/etc}
+> for healthcheck route in localhost, I am getting response ~1-2ms.
+
+## Handy commands
+- `go run ./...` - to run server
+- `lsof -i:[PORT]` - to know PID of proccess running on PORT.
+- `curl -w "@curl-format.txt" -s [URL]` - to know response time of your request with curl
+- `sudo pmap [PID]` - check total memory used by PID
+- `ab -n 100 -c 1 -k URL` - use apache bench to make n request with c concurrency. -k is to keep tcp connection open. 
 
