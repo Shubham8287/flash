@@ -1,3 +1,40 @@
+## p95 with log and log in docker
+     checks.........................: 100.00% ✓ 120993      ✗ 0     
+     data_received..................: 46 MB   736 kB/s
+     data_sent......................: 12 MB   196 kB/s
+     http_req_blocked...............: avg=496.3µs  min=1.2µs   med=2.8µs    max=125.02ms p(90)=4.59µs  p(95)=8.2µs   
+     http_req_connecting............: avg=400.74µs min=0s      med=0s       max=104.55ms p(90)=0s      p(95)=0s      
+     http_req_duration..............: avg=6.23ms   min=191.7µs med=1.04ms   max=250.82ms p(90)=12.13ms p(95)=31.09ms 
+       { expected_response:true }...: avg=6.23ms   min=191.7µs med=1.04ms   max=250.82ms p(90)=12.13ms p(95)=31.09ms 
+     http_req_failed................: 0.00%   ✓ 0           ✗ 120993
+     http_req_receiving.............: avg=248.05µs min=10.8µs  med=30.7µs   max=126.15ms p(90)=131.3µs p(95)=226.6µs 
+     http_req_sending...............: avg=550.29µs min=4.4µs   med=11.6µs   max=104.49ms p(90)=272.7µs p(95)=815.42µs
+     http_req_tls_handshaking.......: avg=0s       min=0s      med=0s       max=0s       p(90)=0s      p(95)=0s      
+     http_req_waiting...............: avg=5.43ms   min=158.9µs med=892.31µs max=174.26ms p(90)=11.16ms p(95)=27.55ms 
+     http_reqs......................: 120993  1951.310417/s
+     iteration_duration.............: avg=1s       min=1s      med=1s       max=1.25s    p(90)=1.01s   p(95)=1.03s   
+     iterations.....................: 120993  1951.310417/s
+     vus............................: 744     min=0         max=2000
+     vus_max........................: 2000    min=1627      max=2000
+## p95 with log as shell process
+     checks.........................: 100.00% ✓ 81149       ✗ 0     
+     data_received..................: 31 MB   494 kB/s
+     data_sent......................: 8.1 MB  131 kB/s
+     http_req_blocked...............: avg=3.46ms   min=1.2µs   med=2.7µs    max=550.29ms p(90)=4.4µs   p(95)=11.3µs 
+     http_req_connecting............: avg=3.27ms   min=0s      med=0s       max=372.12ms p(90)=0s      p(95)=0s     
+     http_req_duration..............: avg=498.11ms min=172.8µs med=235.54ms max=4.95s    p(90)=1.27s   p(95)=2.1s   
+       { expected_response:true }...: avg=498.11ms min=172.8µs med=235.54ms max=4.95s    p(90)=1.27s   p(95)=2.1s   
+     http_req_failed................: 0.00%   ✓ 0           ✗ 81149 
+     http_req_receiving.............: avg=1.02ms   min=10.5µs  med=24.2µs   max=441.05ms p(90)=75.82µs p(95)=5.91ms 
+     http_req_sending...............: avg=2.2ms    min=4.59µs  med=11.1µs   max=357.63ms p(90)=5.14ms  p(95)=12.43ms
+     http_req_tls_handshaking.......: avg=0s       min=0s      med=0s       max=0s       p(90)=0s      p(95)=0s     
+     http_req_waiting...............: avg=494.87ms min=146.7µs med=233.27ms max=4.94s    p(90)=1.26s   p(95)=2.1s   
+     http_reqs......................: 81149   1308.515824/s
+     iteration_duration.............: avg=1.5s     min=1s      med=1.24s    max=6.13s    p(90)=2.27s   p(95)=3.2s   
+     iterations.....................: 81149   1308.515824/s
+     vus............................: 1090    min=0         max=2000
+     vus_max........................: 2000    min=1350      max=2000
+
 
 ##ping on localhost
 ~0.05ms
